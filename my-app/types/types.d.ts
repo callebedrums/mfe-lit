@@ -33,3 +33,10 @@ declare module "*.css?inline" {
   const css: CSSResult;
   export default css;
 }
+
+// types/myPage.d.ts
+declare module "myPage/myPage" {
+  import { Route } from "@vaadin/router";
+  export const routes: Array<Route>;
+  export default routes;
+}
