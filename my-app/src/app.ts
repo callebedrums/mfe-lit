@@ -27,7 +27,9 @@ export class MyApp extends LitElement {
           <a href="${this.baseURL}page2">Page 2</a>
         </nav>
         <div class="slot">
-          <slot></slot>
+          <slot>
+            <!-- Children elements are projected here -->
+          </slot>
         </div>
       </div>
     `;

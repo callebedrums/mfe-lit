@@ -12,7 +12,10 @@ export function getRoutes(baseURL: string = "/") {
     routes = [
       {
         path: "/",
-        component: "my-page",
+        // The `action` function is called when the route is activated
+        // it creates the `my-page` component and sets the `baseURL` property received from the parent app.
+        // if there is no parent app, the `baseURL` is set to `/`
+        // the `my-page` component requires the `baseURL` property to generate the correct links internally to the sub-pages
         action: (_context: Context, commands: Commands) => {
           const myPage = commands.component("my-page") as unknown as MyPage;
           myPage.baseURL = baseURL;
