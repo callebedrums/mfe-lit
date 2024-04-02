@@ -9,7 +9,7 @@ const router = new Router(outlet);
 router.setRoutes([
   {
     path: `/`,
-    children: () => import("./routes").then((module) => module.routes),
+    children: () => import("./routes").then((module) => module.getRoutes()),
   },
   {
     path: "(.*)",
