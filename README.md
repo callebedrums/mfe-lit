@@ -16,11 +16,13 @@ git clone git@github.com:callebedrums/mfe-lit.git
 # install dependencies
 cd ./my-app && npm install && cd ../
 cd ./my-page && npm install && cd ../
+cd ./my-vue && npm install && cd ../
 
 # execute following commands in their own terminal
 
 cd ./my-app && npm run dev
 cd ./my-page && npm run dev
+cd ./my-vue && npm run dev
 ```
 
 ## About
@@ -28,3 +30,5 @@ cd ./my-page && npm run dev
 the _/my-app_ folder contains the Host Application. it provides the initial layout and some pages.
 
 The _/my-page_ folder contains the Micro-Frontend application. it provides other sub-pages to be rendered in the Host Application.
+
+The _/my-vue_ folder contains a Micro-Frontend implemented in Vue. it provides a single page.

@@ -8,6 +8,10 @@ const proxy = {
     // changeOrigin: true,
     rewrite: (path) => path.replace(/^\/app\/my-page/, ""),
   },
+  "/app/my-vue": {
+    target: "http://localhost:3001",
+    rewrite: (path) => path.replace(/^\/app\/my-vue/, ""),
+  }
 };
 
 // https://vitejs.dev/config/
@@ -24,6 +28,7 @@ export default defineConfig({
       },
       remotes: {
         myPage: "/app/my-page/assets/remoteEntry.js",
+        myVue: "/app/my-vue/assets/remoteEntry.js",
         dummyApp: "dummy.js",
       },
       shared: ["lit", "lit-html", "lit-element"],

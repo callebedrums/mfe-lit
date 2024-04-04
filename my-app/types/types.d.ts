@@ -40,3 +40,11 @@ declare module "myPage/myPage" {
   export function getRoutes(baseURL: string = "/"): Array<Route>;
   export default getRoutes;
 }
+
+declare module "myVue/myVue" {
+  import { Route } from "@vaadin/router";
+  export function getRoutes(baseURL: string = "/"): Array<Route>;
+  const tag: string;
+  export { tag, getRoutes };
+  export default getRoutes;
+}
