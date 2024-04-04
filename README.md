@@ -32,3 +32,12 @@ the _/my-app_ folder contains the Host Application. it provides the initial layo
 The _/my-page_ folder contains the Micro-Frontend application. it provides other sub-pages to be rendered in the Host Application.
 
 The _/my-vue_ folder contains a Micro-Frontend implemented in Vue. it provides a single page.
+
+## References
+
+- [lit](https://lit.dev/)
+- [@vaadin/router](https://github.com/vaadin/router?tab=readme-ov-file)
+- [vite](https://vitejs.dev/)
+- [module federation](https://module-federation.io/guide/start/index.html)
+- [vite-plugin-federation](https://github.com/originjs/vite-plugin-federation)
+- [Web Component](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
