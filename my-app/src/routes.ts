@@ -1,4 +1,4 @@
-import { Commands, Context, Route } from "@vaadin/router";
+import { Route } from "@vaadin/router";
 import { getRemote } from "./mfe/remote";
 
 export * from "./home";
