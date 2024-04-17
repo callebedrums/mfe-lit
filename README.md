@@ -31,7 +31,16 @@ The main goal of a Micro-Frontend architecture is to split the application in sm
 
 Each small application is called a Micro-Frontend (MFE), and the entry point is the Host Application.
 
-Is this PoC we have a Host Application and Two MFEs. These three applications are being served from their own server, but the Host Application implements a proxy (for local development environment only)
+Is this PoC we have a Host Application and Two MFEs. These three applications are being served from their own server, but the Host Application implements a proxy (for local development environment only) and simulates a deployment of each app in its own sub-path.
+The Host application is served from the root path (`/`), the _'my-page'_ app is served from the `/app/my-page` path, while the _'my-vue'_ app is served from the `/app/my-vue` path.
+
+This particular implementation uses the `@vaadin/router` library to manage the routing system. It consist of a light weight library that renders web-components for each route configured.
+It is agnostic of frameworks and expect only a web-component to be rendered. This enables each MFE to choose the framework or library to be used to implement the application, as long as it implements a web-component in the end.
+
+This implementation also uses Module Federation to load remove modules and decouple the applications. This way, a route can be mapped to a component that is implemented in a remote application. This component application is asynchronous loaded and rendered.
+These are the MFEs, that also use Module Federation to expose their entrypoints and export the component to be rendered.
+
+If the remote application (MFE) is also composed by multiple pages and/or components, it can return a `@vaadin/router` sub-route configuration instead. this way, it can register multiple sub-routes and multiple components as part of it.
 
 the _/my-app_ folder contains the Host Application. it provides the initial layout and some pages.
 
