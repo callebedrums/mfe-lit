@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpack + Lit + TS</title>
+  </head>
+  <body>
+    <div id="outlet"></div>
+    <script>
+      // the assets are injected as a relative path.
+      // if the path is not the root, we need to redirect to the root
+      // to load the assets correctly
+      // we store the current path in the search query 'next'
+      // so we can redirect back to the original path after rendering the root
+
+      if (window.location.pathname !== "/") {
+        let search = window.location.search;
+        search += search ? "&" : "?";
+        search += `next=${window.location.pathname}`;
+
+        window.location.replace(`${window.location.origin}${search}`);
+      }
+    </script>
+  </body>
+</html>
