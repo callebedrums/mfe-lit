@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/page2",
+    "module": "myPage/myPage",
+    "remote": {
+      "url": "/app/my-page/assets/remoteEntry.js",
+      "scope": "myPage",
+      "module": ["./myPage"],
+      "type": "module"
+    }
+  },
+  {
+    "path": "/my-vue",
+    "module": "myVue/myVue",
+    "remote": {
+      "url": "/app/my-vue/assets/remoteEntry.js",
+      "scope": "myVue",
+      "module": "./myVue",
+      "type": "module"
+    }
+  }
+]

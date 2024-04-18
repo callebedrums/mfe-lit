@@ -42,17 +42,22 @@ let routes: Route[] | undefined = undefined;
 function getRoutes(baseURL: string = "/") {
   console.log("My Vue: getRoutes", baseURL);
 
-  if (!routes) {
-    routes = [
-      {
-        path: "/",
-        component: MyVueTag,
-      },
-    ];
-  }
+  // if (!routes) {
+  //   routes = [
+  //     {
+  //       path: "/",
+  //       component: MyVueTag,
+  //     },
+  //   ];
+  // }
 
   return routes;
 }
 
-export { MyVueElement, MyVueTag as tag, getRoutes };
+function getComponent(baseURL: string = "/") {
+  console.log("My Vue: getComponent", baseURL);
+  return MyVueTag;
+}
+
+export { MyVueElement, getRoutes, getComponent };
 export default getRoutes;
