@@ -42,6 +42,71 @@ These are the MFEs, that also use Module Federation to expose their entrypoints 
 
 If the remote application (MFE) is also composed by multiple pages and/or components, it can return a `@vaadin/router` sub-route configuration instead. this way, it can register multiple sub-routes and multiple components as part of it.
 
+## The Host App
+
+The Host app retrieves a list of the MFE applications with their url path to be mounted in the host, and the remote entry configuration
+
+```JSON
+{
+  "path": "/page2",
+  "remote": {
+    "url": "/app/my-page/assets/remoteEntry.js",
+    "scope": "myPage",
+    "module": "./myPage",
+    "type": "module"
+  }
+}
+```
+
+In the example above, we have an MFE application that will be mounted when the url path `/page2` is accessed, and the remote configuration to load it dynamic following the Module Federation standard.
+
+The host application expect that the remote module implements either the `getComponent` function or the `getRoutes` function. If both are implemented the `getComponent` function takes preference.
+
+The `getComponent` function should return the component tag name that should be rendered as the resolution of the routing. If `getComponent` function is implemented but returns undefined, the Host application will consider the `getRoutes` function instead.
+
+The `getRoutes` function should return a list of `@vaadin/router` routes to be rendered as sub-routes of the MFE application path.
+
+Both functions receive the current path as a baseUrl argument, so MFE knows on what sub-path it is being mounted and configure itself properly if required.
+
+## MFE applications
+
+The MFE application has to expose a remote entry point following the Module Federation standar, and has to implement either the `getComponent` function or the `getRoutes` function.
+
+```TypeScript
+// exporting getComponents example
+export * from 'my-component.ts';
+
+/** setting baseUrl as default in the case the app is running outside the MFE architecture */
+export function getComponents(baseUrl: string = '/') {
+  // we can use the baseUrl to initiate any internal service, or even decide with component to return
+  return 'my-component';
+}
+
+
+// exporting getRoutes example
+import { Commands, Context, Route } from "@vaadin/router";
+export * from 'my-first-component.ts';
+export * from 'my-second-component.ts';
+
+let routes: Route[] | undefined = undefined;
+
+export function getRoutes(baseUrl: string = '/') {
+  // set routes just once
+  if (!routes) {
+    routes = [
+      {
+        path: '/', component: 'my-first-component',
+        path: '/second-path', component: 'my-second-component'
+      }
+    ]
+  }
+
+  return routes;
+}
+```
+
+## ------
+
 the _/my-app_ folder contains the Host Application. it provides the initial layout and some pages.
 
 The _/my-page_ folder contains the Micro-Frontend application. it provides other sub-pages to be rendered in the Host Application.

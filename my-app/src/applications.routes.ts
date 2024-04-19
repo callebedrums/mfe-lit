@@ -10,6 +10,10 @@ async function getApplications() {
   for (const application of applications) {
     const config = application.remote;
     remote().register(config.url, config.scope, config.module, config.type);
+    application.module = `${config.scope}/${config.module.replace(
+      /^\.\//,
+      ""
+    )}`;
   }
 
   return applications;
@@ -28,6 +32,21 @@ export async function getApplicationsRoutes(baseURL: string = "/") {
 
       return {
         path: application.path,
+        /**
+         * The action method is called whenever the route is activated.
+         * If the action method does not return a component, the router proceed with processing children paths.
+         * If the action method returns a component, the router renders the component as the route content.
+         */
+        action: async (_context: Context, commands: Commands) => {
+          const module = await remote().get(application.module);
+          if (typeof module.getComponent !== "function") return;
+          const tag = module.getComponent(baseRouteUrl);
+          if (tag) return commands.component(tag);
+        },
+        /**
+         * Children routes are processed when the parent route is activated.
+         * If the MFE application does not provide a component in the action method, the router will process the children routes.
+         */
         children: async () => {
           let children = [];
           const module = await remote().get(application.module);
@@ -43,12 +62,6 @@ export async function getApplicationsRoutes(baseURL: string = "/") {
           }
 
           return children;
-        },
-        action: async (_context: Context, commands: Commands) => {
-          const module = await remote().get(application.module);
-          if (typeof module.getComponent !== "function") return;
-          const tag = module.getComponent(baseRouteUrl);
-          if (tag) return commands.component(tag);
         },
       };
     });
