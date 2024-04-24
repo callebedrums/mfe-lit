@@ -27,6 +27,7 @@ export class MyApp extends LitElement {
           <a href="${this.baseURL}page1">Page 1</a>
           <a href="${this.baseURL}page2">Page 2</a>
           <a href="${this.baseURL}my-vue">My Vue</a>
+          <a href="${this.baseURL}my-vue-comp">My Vue Components</a>
         </nav>
         <div class="slot">
           <slot>

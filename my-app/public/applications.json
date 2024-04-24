@@ -16,5 +16,14 @@
       "module": "./myVue",
       "type": "module"
     }
+  },
+  {
+    "path": "/my-vue-comp",
+    "remote": {
+      "url": "/app/my-vue-comp/assets/remoteEntry.js",
+      "scope": "myVueComp",
+      "module": "./myVueComp",
+      "type": "module"
+    }
   }
 ]

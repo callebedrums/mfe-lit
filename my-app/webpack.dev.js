@@ -20,6 +20,11 @@ export default merge(config, {
         pathRewrite: { "^/app/my-page": "" },
       },
       {
+        context: ["/app/my-vue-comp"],
+        target: "http://localhost:3002",
+        pathRewrite: { "^/app/my-vue-comp": "" },
+      },
+      {
         context: ["/app/my-vue"],
         target: "http://localhost:3001",
         pathRewrite: { "^/app/my-vue": "" },
